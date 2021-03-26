@@ -5,6 +5,6 @@ RUN apt-get install -y nginx
 
 WORKDIR /usr/src/ft_server
 COPY srcs/* ./
-CMD ["./start.sh"]
+CMD ["nginx", "-g", "daemon off;"]
 
 EXPOSE 80
