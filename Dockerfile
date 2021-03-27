@@ -25,7 +25,7 @@ RUN curl -fLsS -o $PMA_ARCHIVE $PMA_URL; \
     tar -xf $PMA_ARCHIVE -C $PMA_PATH; \
 	rm -f $PMA_ARCHIVE; \
 	mv $PMA_PATH/$PMA_DIR $PMA_PATH/phpmyadmin; \
-	chown www-data:www-data $PMA_PATH/phpmyadmin;
+	chown -R www-data:www-data $PMA_PATH/phpmyadmin;
 
 # Configure NGINX
 
