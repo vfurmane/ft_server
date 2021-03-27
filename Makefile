@@ -6,7 +6,7 @@
 #    By: vfurmane <vfurmane@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/27 20:13:53 by vfurmane          #+#    #+#              #
-#    Updated: 2021/03/27 20:59:57 by vfurmane         ###   ########.fr        #
+#    Updated: 2021/03/27 21:09:27 by vfurmane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,10 +35,15 @@ run:
 			docker run $(PORTS) $(NAME)
 
 clean:
-			docker rm $(shell docker ps -alq -f 'label=image=ft_server')
+ifneq ($(shell docker ps -aq | wc -l),0)
+			docker stop $(shell docker ps -aq -f 'label=image=ft_server')
+			docker rm $(shell docker ps -aq -f 'label=image=ft_server')
+endif
 
 fclean:		clean
+ifneq ($(shell docker images | grep $(NAME) | wc -l),0)
 			docker rmi $(NAME)
+endif
 
 re:			fclean all
 
