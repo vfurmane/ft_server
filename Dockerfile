@@ -1,5 +1,7 @@
 FROM debian:buster
 
+LABEL image=ft_server
+
 RUN apt-get update && apt-get install -y \
     php7.3-fpm \
 	php7.3-mysqli \
