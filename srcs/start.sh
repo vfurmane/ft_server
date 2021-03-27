@@ -25,5 +25,16 @@ mysql -u root -e "CREATE USER 'vfurmane'@'localhost' IDENTIFIED BY '$MYSQL_PASSW
 mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'vfurmane'@'localhost';"
 mysql -u root -e "FLUSH PRIVILEGES;"
 
+# Configure phpMyAdmin
+
+cp /usr/share/phpmyadmin/config.sample.inc.php  /usr/share/phpmyadmin/config.inc.php
+
+if [ -f PMA_SECRET ]
+then
+	sed -Ei "s/\\\$cfg\['blowfish_secret'\]\s*=\s*'.*'/\$cfg['blowfish_secret'] = '$(cat PMA_SECRET)'/g" /usr/share/phpmyadmin/config.inc.php
+fi
+
+mysql -u root < /usr/share/phpmyadmin/sql/create_tables.sql
+
 echo "${BLUE}Starting NGINX...${NC}"
 exec "$@"

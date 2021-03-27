@@ -4,6 +4,7 @@ RUN apt-get update && apt-get install -y \
     php7.3-fpm \
 	php7.3-mysqli \
 	php7.3-xml \
+	php7.3-mbstring \
     nginx \
 	default-mysql-server \
 	curl \
