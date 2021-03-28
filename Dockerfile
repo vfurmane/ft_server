@@ -6,7 +6,7 @@
 #    By: vfurmane <vfurmane@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/27 20:13:44 by vfurmane          #+#    #+#              #
-#    Updated: 2021/03/27 20:13:46 by vfurmane         ###   ########.fr        #
+#    Updated: 2021/03/28 11:23:08 by vfurmane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ RUN curl -fLsS -o $PMA_ARCHIVE $PMA_URL; \
 ENV NGINX_PATH /etc/nginx
 
 COPY srcs/nginx/sites-available/* $NGINX_PATH/sites-available/
-RUN ln -s $NGINX_PATH/sites-available/phpmyadmin $NGINX_PATH/sites-enabled
+RUN ln -s $NGINX_PATH/sites-available/phpmyadmin $NGINX_PATH/sites-enabled; \
+    rm -rf /var/www/html/*
 
 # End configration
 
