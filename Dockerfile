@@ -6,7 +6,7 @@
 #    By: vfurmane <vfurmane@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/27 20:13:44 by vfurmane          #+#    #+#              #
-#    Updated: 2021/03/28 11:23:08 by vfurmane         ###   ########.fr        #
+#    Updated: 2021/03/28 17:28:38 by vfurmane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,12 +42,27 @@ RUN curl -fLsS -o $PMA_ARCHIVE $PMA_URL; \
 	mv $PMA_PATH/$PMA_DIR $PMA_PATH/phpmyadmin; \
 	chown -R www-data:www-data $PMA_PATH/phpmyadmin;
 
+# Install WordPress
+
+ENV WP_VERSION 5.7
+ENV WP_URL https://wordpress.org/wordpress-${WP_VERSION}.tar.gz
+ENV WP_ARCHIVE wordpress.tar.gz
+ENV WP_PATH /usr/share/
+
+RUN curl -fLsS -o $WP_ARCHIVE $WP_URL; \
+    mkdir -p $WP_PATH; \
+    tar -xzf $WP_ARCHIVE -C $WP_PATH; \
+	rm -f $WP_ARCHIVE; \
+	chown -R www-data:www-data $PMA_PATH/wordpress;
+COPY srcs/wp-config.php $WP_PATH/wordpress/
+
 # Configure NGINX
 
 ENV NGINX_PATH /etc/nginx
 
 COPY srcs/nginx/sites-available/* $NGINX_PATH/sites-available/
 RUN ln -s $NGINX_PATH/sites-available/phpmyadmin $NGINX_PATH/sites-enabled; \
+    ln -s $NGINX_PATH/sites-available/wordpress $NGINX_PATH/sites-enabled; \
     rm -rf /var/www/html/*
 
 # End configration

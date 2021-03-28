@@ -23,6 +23,10 @@ fi
 
 mysql -u root -e "CREATE USER 'vfurmane'@'localhost' IDENTIFIED BY '$MYSQL_PASSWORD';"
 mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'vfurmane'@'localhost';"
+
+mysql -u root -e "CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'wordpress_password';"
+mysql -u root -e "CREATE DATABASE wordpress;"
+mysql -u root -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'localhost';"
 mysql -u root -e "FLUSH PRIVILEGES;"
 
 # Configure phpMyAdmin

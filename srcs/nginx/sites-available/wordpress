@@ -1,0 +1,19 @@
+server {
+	listen 80;
+	listen [::]:80;
+
+	root /usr/share/wordpress;
+	index index.php indexp.html index.htm;
+
+	server_name wordpress.localhost www.wordpress.localhost;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+
+	location ~ \.php$ {
+		autoindex on;
+		include snippets/fastcgi-php.conf;
+		fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+	}
+}
