@@ -6,6 +6,10 @@ GREEN="\033[32m"
 YELLOW="\033[33m"
 BLUE="\033[34m"
 
+echo "${BLUE}Generating SSL Certificate...${NC}"
+mkdir /etc/nginx/ssl
+openssl req -x509 -newkey rsa:4096 -nodes -keyout /etc/nginx/ssl/localhost.key -out /etc/nginx/ssl/localhost.crt -days 365 -subj '/C=FR/ST=Paris/L=Paris/O=42Paris/CN=localhost'
+
 echo "${BLUE}Starting PHP....${NC}"
 service php7.3-fpm start
 
@@ -41,7 +45,5 @@ fi
 mysql -u root < /usr/share/phpmyadmin/sql/create_tables.sql
 
 echo "${BLUE}Starting NGINX...${NC}"
-
-mkdir /etc/nginx/ssl
-openssl req -x509 -newkey rsa:4096 -nodes -keyout /etc/nginx/ssl/localhost.key -out /etc/nginx/ssl/localhost.crt -days 365 -subj '/C=FR/ST=Paris/L=Paris/O=42Paris/CN=localhost'
+echo "${GREEN}The server is running!${NC}"
 exec "$@"
