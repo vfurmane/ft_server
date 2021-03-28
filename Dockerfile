@@ -6,7 +6,7 @@
 #    By: vfurmane <vfurmane@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/27 20:13:44 by vfurmane          #+#    #+#              #
-#    Updated: 2021/03/28 17:28:38 by vfurmane         ###   ########.fr        #
+#    Updated: 2021/03/28 18:07:00 by vfurmane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y \
 	php7.3-mbstring \
     nginx \
 	default-mysql-server \
+	openssl \
 	curl \
     xz-utils \
 	tar
@@ -71,4 +72,5 @@ COPY srcs/* ./
 ENTRYPOINT ["./start.sh"]
 
 EXPOSE 80
+EXPOSE 443
 CMD ["nginx", "-g", "daemon off;"]

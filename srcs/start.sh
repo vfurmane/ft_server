@@ -41,4 +41,7 @@ fi
 mysql -u root < /usr/share/phpmyadmin/sql/create_tables.sql
 
 echo "${BLUE}Starting NGINX...${NC}"
+
+mkdir /etc/nginx/ssl
+openssl req -x509 -newkey rsa:4096 -nodes -keyout /etc/nginx/ssl/localhost.key -out /etc/nginx/ssl/localhost.crt -days 365 -subj '/C=FR/ST=Paris/L=Paris/O=42Paris/CN=localhost'
 exec "$@"

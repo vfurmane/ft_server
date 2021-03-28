@@ -6,12 +6,12 @@
 #    By: vfurmane <vfurmane@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/27 20:13:53 by vfurmane          #+#    #+#              #
-#    Updated: 2021/03/28 16:25:42 by vfurmane         ###   ########.fr        #
+#    Updated: 2021/03/28 18:07:11 by vfurmane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= ft_server
-PORTS		= $(addprefix -p , 80:80)
+PORTS		= $(addprefix -p , 80:80 443:443)
 HELP_MSG	= "Usage: make all|help|build|run|clean|fclean|re\n\n\
 \tall:		Build the image and run it in a container\n\
 \thelp:		Echo this message\n\

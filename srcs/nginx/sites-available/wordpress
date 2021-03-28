@@ -2,6 +2,12 @@ server {
 	listen 80;
 	listen [::]:80;
 
+	listen 443 ssl;
+	listen [::]:443;
+
+	ssl_certificate /etc/nginx/ssl/localhost.crt;
+	ssl_certificate_key /etc/nginx/ssl/localhost.key;
+
 	root /usr/share/wordpress;
 	index index.php indexp.html index.htm;
 
