@@ -6,7 +6,7 @@
 #    By: vfurmane <vfurmane@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/27 20:13:53 by vfurmane          #+#    #+#              #
-#    Updated: 2021/03/28 11:16:07 by vfurmane         ###   ########.fr        #
+#    Updated: 2021/03/28 16:25:42 by vfurmane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,13 @@ build:
 run:
 			docker run $(PORTS) $(NAME)
 
+debug:
+ifneq ($(shell docker ps -lq -f 'label=image=ft_server' -f "status=running" | wc -l),0)
+			docker exec -it $(shell docker ps -lq -f 'label=image=ft_server' -f "status=running") bash
+endif
+
 clean:
-ifneq ($(shell docker ps -aq | wc -l),0)
+ifneq ($(shell docker ps -aq -f 'label=image=ft_server' | wc -l),0)
 			docker stop $(shell docker ps -aq -f 'label=image=ft_server')
 			docker rm $(shell docker ps -aq -f 'label=image=ft_server')
 endif
@@ -47,4 +52,4 @@ endif
 
 re:			fclean all
 
-.PHONY:		all help clean fclean re
+.PHONY:		all help build run debug clean fclean re
